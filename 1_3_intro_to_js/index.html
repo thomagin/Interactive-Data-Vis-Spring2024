@@ -9,15 +9,16 @@
 <body>
   <h1>Moments Wasted Button</h1>
   <h3>Section 1 | Tutorial 3 | Intro to JS</h3>
-<button onclick="updateCount()">Moments wasted</button>
+  <button onclick="updateCounter()">Seconds thrown away</button>
   <div id="counter">0</div>
   <script>
     let click = 0;
-    function updateCount() {click++; document.getElementById('counter').innerText = click;}
+    function updateCounter() {
+      click++;
+      document.getElementById('counter').innerText = click;
+    }
   </script>
   </body>
   <script src="main.js"></script>
 </body>
 </html>
-
-<!--https://thomagin.github.io/Interactive-Data-Vis-Spring2024/1_3_intro_to_js/index.html-->
