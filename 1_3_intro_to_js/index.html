@@ -12,8 +12,9 @@
   <button onclick="updateCount()">Moments wasted</button>
   <div id="counter">0</div>
   <script>
-    let click = 0;
-    function updateCount() {click++; document.getElementById('counter').innerText = click;}
+    const counterdisp = document.getElementById('counter')
+    let clickCount = 0;
+    function updateCount() {clickCount++; counterdisp.innerText = clickCount;}
   </script>
   </body>
   <script src="main.js"></script>
