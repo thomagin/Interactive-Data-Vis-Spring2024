@@ -56,4 +56,17 @@ d3.csv('[PATH_TO_YOUR_DATA]', d => {
       .attr("stroke", "black")
       .attr("d", d => lineGen(d))
 
+
+      //generator function
+      const groupedData = d3.groups(data, d => d.country)
+
+      svg.selectAll("path.country")
+        .data(groupedData)
+        .join("path")
+        .attr("class", "country")
+        // .attr("d", d => lineGen(d[1])) this looks at the second item in the array for each country
+        .attr("d", (countryName, data]) => lineGen(data))
+        .attr("fill", "none")
+        .attr("stroke", "black")
+
 });
