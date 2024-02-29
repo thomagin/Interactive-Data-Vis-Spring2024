@@ -1,5 +1,5 @@
 /* CONSTANTS AND GLOBALS */
-const width = ,
+const width = window.innerWidth * 0.7,
    height = window.innerHeight * 0.7,
    margin = { top: 20, bottom: 60, left: 60, right: 40 },
    radius = 5;
@@ -34,7 +34,7 @@ d3.csv("../data/MoMA_distributions.csv", d3.autoType)
       .attr("transform", `translate(0, ${height - margin.bottom})`)
       .call(xAxis)
 
-    const yAxis
+    const yAxis = d3.axisBottom(yScale)
     svg.append("g")
       .attr("transform", `translate(${margin.left}, 0)`)
       .call(yAxis)
