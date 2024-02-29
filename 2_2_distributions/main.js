@@ -45,4 +45,5 @@ d3.csv("../data/MoMA_distributions.csv", d3.autoType)
         .data(data)
         .join("circle")
      //   .attr("cx", (d, i) => xScale(d.))
+     // test test
   });
