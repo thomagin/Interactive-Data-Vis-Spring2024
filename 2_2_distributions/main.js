@@ -44,6 +44,49 @@ d3.csv("../data/MoMA_distributions.csv", d3.autoType)
       svg.selectAll(".circle")
         .data(data)
         .join("circle")
+        .attr("r", radius)
+        .attr("cx", d => d.ideologyScore2020)
+        .attr("cy", d => yScale(d.envScore2020))
+
+
+      let currentData = data;
+
+     
+      
+        const draw = () => {
+        svg.selectAll(".circle")
+        .data(currentData, d => d.BioID)
+        .join(
+          enter => enter
+          .append("circle")
+          .attr("class", "circle")
+          .attr("r", radius)
+          .attr("cx", d => xScale(d.ideologyScore2020))
+          .attr("cy", d => yScale(d.envScore2020)),
+          attr("fill", d => colorScale(d.Party)), //throwing up error bc of . before attr??
+        update => update
+          .call(sel => sel.transition()
+          .attr("cx", d => xScale(d.ideologyScore2020))
+          .attr("cy", d => yScale(d.envScore2020)))
+        ,
+        exit => exit
+          .call(sel => sel.transition()
+            .duration(2500)
+            .attr("r", 0)
+            .remove()
+          )
+        )
+
+      }
+      draw();
+
+    }, 3000)
+
+    setTimeout(() => {
+      console.log("its run")
+      currentData = data.filter(d => d.party === "D")
      //   .attr("cx", (d, i) => xScale(d.))
      // test test
+     //console.log("its run", currentData)
+     //draw();
   });

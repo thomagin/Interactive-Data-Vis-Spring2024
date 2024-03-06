@@ -1,7 +1,8 @@
 
 /* CONSTANTS AND GLOBALS */
- const width = window.innerWidth * 0.8
- const height = 500
+ const width = window.innerWidth * 0.8;
+ const height = 500;
+ const margin = 40;
 
 /* LOAD DATA */
 d3.csv('../data/MoMA_topTenNationalities.csv', d3.autoType)
@@ -11,12 +12,12 @@ d3.csv('../data/MoMA_topTenNationalities.csv', d3.autoType)
     /* SCALES */
     /** This is where you should define your scales from data to pixel space */
     const xScale = d3.scaleLinear()
-      .domain([0, d3.max(data, d=> d.count)])
-      .range([height, 0])
+      .domain([0, d3.max(data, d=> d.Count)])
+      .range([0, width - margin])
 
     const yScale = d3.scaleBand()
-      .domain(d3.map(d=> d.activity))
-      .range([0, width]) //visual variable
+      .domain(data.map(d=> d.Nationality))
+      .range([0, height]) //visual variable
       .paddingInner(.2)
 
     /* HTML ELEMENTS */
@@ -32,8 +33,21 @@ d3.csv('../data/MoMA_topTenNationalities.csv', d3.autoType)
       svg.selectAll("rect")
         .data(data)
         .join("rect")
-        .attr("width", yScale.bandwidth())
-        .attr("height", d => width - xScale(d.count))
-        .attr("x", d=>xScale(d.nationality))
-        .attr("y", d=>yScale(d.count))
-  })
+        .attr("width", d => xScale(d.Count))
+        .attr("height", d => yScale.bandwidth())
+        .attr("x", xScale(0))
+        .attr("y", d => yScale(d.Nationality))
+        ;
+
+      // Add labels
+
+    svg.selectAll("text")
+    .data(data)
+    .join("text")
+    .text(d => d.Nationality)
+    .attr("x", d => xScale(d.Count) + 5) // Adjusted x position
+    .attr("y", d => yScale(d.Nationality) + yScale.bandwidth() / 2) // Center vertically
+    .attr("dy", "0.35em") // Center horizontally
+    .style("fill", "black"); // Label color
+
+      })
