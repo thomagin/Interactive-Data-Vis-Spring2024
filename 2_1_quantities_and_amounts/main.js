@@ -4,6 +4,8 @@
  const height = 500;
  const margin = 40;
 
+ const colorScale = d3.scaleOrdinal(d3.schemeAccent);
+
 /* LOAD DATA */
 d3.csv('../data/MoMA_topTenNationalities.csv', d3.autoType)
   .then(data => {
@@ -37,6 +39,7 @@ d3.csv('../data/MoMA_topTenNationalities.csv', d3.autoType)
         .attr("height", d => yScale.bandwidth())
         .attr("x", xScale(0))
         .attr("y", d => yScale(d.Nationality))
+        .attr("fill", d => colorScale(d.Nationality))
         ;
 
       // Add labels
@@ -47,7 +50,6 @@ d3.csv('../data/MoMA_topTenNationalities.csv', d3.autoType)
     .text(d => d.Nationality)
     .attr("x", d => xScale(d.Count) + 5) // Adjusted x position
     .attr("y", d => yScale(d.Nationality) + yScale.bandwidth() / 2) // Center vertically
-    .attr("dy", "0.35em") // Center horizontally
     .style("fill", "black"); // Label color
 
-      })
+    })
