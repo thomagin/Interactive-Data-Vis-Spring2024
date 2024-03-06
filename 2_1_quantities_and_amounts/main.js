@@ -36,7 +36,4 @@ d3.csv('../data/MoMA_topTenNationalities.csv', d3.autoType)
         .attr("height", d => width - xScale(d.count))
         .attr("x", d=>xScale(d.nationality))
         .attr("y", d=>yScale(d.count))
-
-
-
   })
