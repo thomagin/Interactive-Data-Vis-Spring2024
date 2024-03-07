@@ -48,8 +48,8 @@ d3.csv('../data/MoMA_topTenNationalities.csv', d3.autoType)
     .data(data)
     .join("text")
     .text(d => d.Nationality)
-    .attr("x", d => xScale(d.Count) + 5) // Adjusted x position
-    .attr("y", d => yScale(d.Nationality) + yScale.bandwidth() / 2) // Center vertically
-    .style("fill", "black"); // Label color
+    .attr("x", d => xScale(d.Count) + 5) 
+    .attr("y", d => yScale(d.Nationality) + yScale.bandwidth() / 2) 
+    .style("fill", "black"); 
 
     })
