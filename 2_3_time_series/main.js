@@ -6,7 +6,7 @@
 
 /* LOAD DATA */
 d3.csv('../data/HOOD.csv', (d) => ({
-  date: d3.timeParse("%m/%d/%Y")(d.date), // Parse date using format string
+  date: d3.timeParse("%Y/%m/%d")(d.date), // Parse date using format string
   close_last: +d.close_last  // Convert 'close_last' to number
 }))
  .then(data => {
