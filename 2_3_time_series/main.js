@@ -1,17 +1,12 @@
  /* CONSTANTS AND GLOBALS */
  const width = window.innerWidth * 0.7,
  height = window.innerHeight * 0.7,
- margin = { top: 20, bottom: 50, left: 60, right: 60 };
-
+ margin = { top: 0, bottom: 20, left: 100, right: 60 };
 
 /* LOAD DATA */
-d3.csv('../data/HOOD.csv', (d) => ({
-  date: d3.timeParse("%Y/%m/%d")(d.date), // Parse date using format string
-  close_last: +d.close_last  // Convert 'close_last' to number
-}))
- .then(data => {
-  console.log('data :>> ', data)
-
+d3.csv('../data/HOOD.csv', d3.autoType)
+.then(data => {
+  console.log('data :>> ', data);
 
   // SCALES
     const xScale = d3.scaleTime()
@@ -30,10 +25,15 @@ d3.csv('../data/HOOD.csv', (d) => ({
 
   // BUILD AND CALL AXES
 
-  const xAxis = d3.axisBottom(xScale);
+  const xAxis = d3.axisBottom(xScale)
+    .tickFormat(d3.timeFormat("%m/%d/%Y"));
   svg.append("g")
     .attr("transform", `translate(0,${height - margin.bottom})`)
-    .call(xAxis);
+    .call(xAxis)
+    .selectAll("text") // Select all text elements within the x-axis
+    .attr("transform", "rotate(-15)") // Rotate the text labels
+    .attr("dx", "-0.5em") // Adjust horizontal position
+    .attr("dy", "0.5em");
 
   const yAxis = d3.axisLeft(yScale);
   svg.append("g")
@@ -41,19 +41,30 @@ d3.csv('../data/HOOD.csv', (d) => ({
     .call(yAxis);
 
   // LINE GENERATOR FUNCTION
+const lineGen = d3.line()
+.x(d => xScale(d.date))
+.y(d => yScale(d.close_last));
 
-  const areaGen = d3.area()
-    .x(d => xScale(d.date))
-    .y(d => yScale(d.close_last))
+//AREA GENERATOR
 
-  // DRAW LINE
+const areaGen = d3.area()
+  .x(d => xScale(d.date))
+  .y0(yScale(0)) 
+  .y1(d => yScale(d.close_last)); 
 
+// DRAW LINE
+svg.append("path")
+.datum(data)
+.attr("fill", "none")
+.attr("stroke", "black")
+.attr("d", lineGen);
 
-  svg.append("path")
-    .datum(data)
-    .attr("fill", "pink")
-    .attr("opacity", 0.7)
-    .attr("d", areaGen);
+// DRAW AREA
+svg.append("path")
+  .datum(data)
+  .attr("fill", "pink")
+  .attr("opacity", 0.7)
+  .attr("d", areaGen);
 
   });
 
