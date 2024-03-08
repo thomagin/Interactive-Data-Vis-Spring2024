@@ -1,27 +1,17 @@
  /* CONSTANTS AND GLOBALS */
  const width = window.innerWidth * 0.7,
  height = window.innerHeight * 0.7,
- margin = { top: 20, bottom: 50, left: 60, right: 60 }
- const parseDate = d3.timeParse("%m/%d/%y");
- const formatDate = d3.timeFormat("%m/%d/%Y")
-;
+ margin = { top: 20, bottom: 50, left: 60, right: 60 };
+
 
 /* LOAD DATA */
-d3.csv('../data/HOOD.csv', d3.autoType)
+d3.csv('../data/HOOD.csv', (d) => ({
+  date: d3.timeParse("%m/%d/%Y")(d.date), // Parse date using format string
+  close_last: +d.close_last  // Convert 'close_last' to number
+}))
  .then(data => {
-  console.log('data :>> ', data);
+  console.log('data :>> ', data)
 
-  data.forEach(d => {
-    d.date = parseDate(d.date);
-    console.log('Parsed Date:', d.date);
-
-  
- 
- // return {
-  //   date: new Date(+d.date, 0, 1),
-  //   country: d.Entity,
-  //   population: +d.Population
- // }
 
   // SCALES
     const xScale = d3.scaleTime()
@@ -67,6 +57,12 @@ d3.csv('../data/HOOD.csv', d3.autoType)
 
   });
 
+ // return {
+  //   date: new Date(+d.date, 0, 1),
+  //   country: d.Entity,
+  //   population: +d.Population
+ // }
+
   //  svg.selectAll(".circle")
    //    .data(date)
    //   .join("circle")
@@ -94,4 +90,4 @@ d3.csv('../data/HOOD.csv', d3.autoType)
 //        .attr("fill", "none")
 //        .attr("stroke", "black")
 
- })
+ 
