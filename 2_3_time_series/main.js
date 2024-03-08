@@ -30,9 +30,9 @@ d3.csv('../data/HOOD.csv', d3.autoType)
   svg.append("g")
     .attr("transform", `translate(0,${height - margin.bottom})`)
     .call(xAxis)
-    .selectAll("text") // Select all text elements within the x-axis
-    .attr("transform", "rotate(-15)") // Rotate the text labels
-    .attr("dx", "-0.5em") // Adjust horizontal position
+    .selectAll("text") 
+    .attr("transform", "rotate(-15)") 
+    .attr("dx", "-0.5em") 
     .attr("dy", "0.5em");
 
   const yAxis = d3.axisLeft(yScale);
