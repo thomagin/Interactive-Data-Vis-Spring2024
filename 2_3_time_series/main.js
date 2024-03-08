@@ -31,7 +31,7 @@ d3.csv('../data/HOOD.csv', d3.autoType)
     .attr("transform", `translate(0,${height - margin.bottom})`)
     .call(xAxis)
     .selectAll("text") 
-    .attr("transform", "rotate(-15)") 
+    .attr("transform", "rotate(-10)") 
     .attr("dx", "-0.5em") 
     .attr("dy", "0.5em");
 
@@ -62,7 +62,7 @@ svg.append("path")
 // DRAW AREA
 svg.append("path")
   .datum(data)
-  .attr("fill", "pink")
+  .attr("fill", "green")
   .attr("opacity", 0.7)
   .attr("d", areaGen);
 
