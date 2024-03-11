@@ -66,6 +66,15 @@ svg.append("path")
   .attr("opacity", 0.7)
   .attr("d", areaGen);
 
+  //y label
+
+svg.append("text")
+  .attr("transform", "rotate(-90)")
+  .attr("x", -height / 2)
+  .attr("y", margin.left / 2)
+  .attr("text-anchor", "middle")
+  .text("Closing Price");
+
   });
 
  // return {
