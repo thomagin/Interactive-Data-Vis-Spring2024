@@ -30,33 +30,21 @@
 
   const geoPathGen = d3.geoPath(projection);
 
-  // APPEND GEOJSON PATH  
+  // COUNTRY ARRAY
+  const artistcountry = nationalities.map(d => d.Country);
 
+  // APPEND GEOJSON PATH
   svg.selectAll(".property")
-  .data(geojson.features)
-  .join("path")
-  .attr("class", "country")
-  .attr("stroke", "black")
-  .attr("fill", "transparent")
-  .attr("d", d => geoPathGen(d));
-
-  // APPEND DATA AS SHAPE
-  svg.selectAll(".nationality")
-    .data(nationalities)
-    .join("circle")
-    .attr("class", "nationality")
-    .attr("r", d => Math.sqrt(d.Count) * 0.3) // sizing the dots
-    .attr("fill", "pink")
-    .attr("cx", d => {
-      const country = d.Country; 
-      const feature = geojson.features.find(f => f.properties.name === country);
-      return feature ? projection(d3.geoCentroid(feature))[0] : null;
-    })
-    .attr("cy", d => {
-      const country = d.Country; 
-      const feature = geojson.features.find(f => f.properties.name === country);
-      return feature ? projection(d3.geoCentroid(feature))[1] : null;
-    });
+      .data(geojson.features)
+      .join("path")
+      .attr("class", "country")
+      .attr("stroke", "black")
+      .attr("fill", d => {
+          const country = d.properties.name;
+          return artistcountry.includes(country) ? "pink" : "transparent";
+      })
+      .attr("d", d => geoPathGen(d));
+});
 
        // .attr("cx", 20)
        // .attr("cy", 20)
@@ -65,5 +53,4 @@
        //  return `translate(${point[0]},${point[1]})`
        //   })
 
-});
 

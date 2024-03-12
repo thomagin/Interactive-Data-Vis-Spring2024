@@ -43,8 +43,6 @@ d3.csv("../data/MoMA_distributions.csv", d3.autoType)
       .attr("transform", `translate(${margin.left}, 0)`)
       .call(yAxis)
 
-      
-
       //draw circles
 
       svg.selectAll(".circle")
@@ -55,7 +53,6 @@ d3.csv("../data/MoMA_distributions.csv", d3.autoType)
         .attr("cx", d => xScale(d['Length (cm)']))
         .attr("cy", d => yScale(d['Width (cm)']))
         .attr("fill", "green")
-
 
         //dot labels
       const labels = svg.selectAll(".label")
