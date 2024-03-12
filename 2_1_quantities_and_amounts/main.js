@@ -42,7 +42,7 @@ d3.csv('../data/MoMA_topTenNationalities.csv', d3.autoType)
         .attr("fill", d => colorScale(d.Nationality))
         ;
 
-      // Add labels
+      // labels
 
     svg.selectAll("text")
     .data(data)
@@ -50,6 +50,7 @@ d3.csv('../data/MoMA_topTenNationalities.csv', d3.autoType)
     .text(d => d.Nationality)
     .attr("x", d => xScale(d.Count) + 5) 
     .attr("y", d => yScale(d.Nationality) + yScale.bandwidth() / 2) 
-    .style("fill", "black"); 
+    .style("fill", "black")
+    .style("font-size", "9px"); 
 
     })

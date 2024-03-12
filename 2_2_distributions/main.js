@@ -56,6 +56,8 @@ d3.csv("../data/MoMA_distributions.csv", d3.autoType)
         .attr("cy", d => yScale(d['Width (cm)']))
         .attr("fill", "green")
 
+
+        //dot labels
       const labels = svg.selectAll(".label")
         .data(data)
         .join("text")
@@ -66,6 +68,27 @@ d3.csv("../data/MoMA_distributions.csv", d3.autoType)
         .style("font-size", "10px")
         .style("fill", "black")
         .style("opacity", 0.2);
+
+        //axis labels
+
+      svg.append("text")
+        .attr("class", "xlabel")
+        .attr("x", width / 2)
+        .attr("y", height - margin.bottom / 2)
+        .attr("text-anchor", "middle")
+        .text("Length (cm)")
+        .style("font-size", "14px")
+        .style("fill", "black");
+
+      svg.append("text")
+        .attr("class", "ylabel")
+        .attr("x", -height / 2)
+        .attr("y", margin.left / 2)
+        .attr("transform", "rotate(-90)")
+        .attr("text-anchor", "middle")
+        .text("Width (cm)")
+        .style("font-size", "14px")
+        .style("fill", "black");
       })
 
       //let currentData = data;
