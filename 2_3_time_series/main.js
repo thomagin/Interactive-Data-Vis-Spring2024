@@ -110,4 +110,7 @@ svg.append("text")
 //        .attr("fill", "none")
 //        .attr("stroke", "black")
 
- 
+//https://thomagin.github.io/Interactive-Data-Vis-Spring2024/2_3_time_series/
+
+
+//https://github.com/thomagin/Interactive-Data-Vis-Spring2024/blob/main/2_3_time_series/main.js

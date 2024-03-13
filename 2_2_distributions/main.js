@@ -129,3 +129,7 @@ d3.csv("../data/MoMA_distributions.csv", d3.autoType)
      //console.log("its run", currentData)
      //draw();
   
+     //https://thomagin.github.io/Interactive-Data-Vis-Spring2024/2_2_distributions/
+
+     //https://github.com/thomagin/Interactive-Data-Vis-Spring2024/blob/main/2_2_distributions/main.js
+     

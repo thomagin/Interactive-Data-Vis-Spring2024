@@ -58,4 +58,6 @@ svg.selectAll(".property")
        //  return `translate(${point[0]},${point[1]})`
        //   })
 
+       //https://thomagin.github.io/Interactive-Data-Vis-Spring2024/2_4_geographic/
+//https://github.com/thomagin/Interactive-Data-Vis-Spring2024/blob/main/2_4_geographic/main.js
 

@@ -54,3 +54,6 @@ d3.csv('../data/MoMA_topTenNationalities.csv', d3.autoType)
     .style("font-size", "9px"); 
 
     })
+
+    //https://thomagin.github.io/Interactive-Data-Vis-Spring2024/2_1_quantities_and_amounts/
+    //https://github.com/thomagin/Interactive-Data-Vis-Spring2024/blob/main/2_1_quantities_and_amounts/main.js
