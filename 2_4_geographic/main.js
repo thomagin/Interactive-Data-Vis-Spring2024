@@ -14,7 +14,6 @@
   console.log(geojson)
   console.log(nationalities)
 
-
   const svg = d3 
     .select("#container")
     .append("svg")
@@ -30,20 +29,26 @@
 
   const geoPathGen = d3.geoPath(projection);
 
-  // COUNTRY ARRAY
-  const artistcountry = nationalities.map(d => d.Country);
+// SCALE FOR CHOROPLETH
 
-  // APPEND GEOJSON PATH
-  svg.selectAll(".property")
-      .data(geojson.features)
-      .join("path")
-      .attr("class", "country")
-      .attr("stroke", "black")
-      .attr("fill", d => {
-          const country = d.properties.name;
-          return artistcountry.includes(country) ? "pink" : "transparent";
-      })
-      .attr("d", d => geoPathGen(d));
+  const maxCount = d3.max(nationalities, d => d.Count);
+
+// LOG COLOR SCALE (bc US has so many pieces in moma)
+  const colorScale = d3.scaleLog()
+    .domain([1, maxCount])
+    .range(["transparent", "blue"]);
+
+// APPEND GEOJSON PATH
+svg.selectAll(".property")
+    .data(geojson.features)
+    .join("path")
+    .attr("class", "country")
+    .attr("stroke", "black")
+    .attr("fill", d => {
+        const country = d.properties.name;
+        const nationality = nationalities.find(n => n.Country === country);
+        return nationality ? colorScale(nationality.Count) : "transparent";})
+    .attr("d", d => geoPathGen(d));
 });
 
        // .attr("cx", 20)
