@@ -19,7 +19,7 @@ d3.csv('../data/MoMA_topTenNationalities.csv', d3.autoType)
 
     const yScale = d3.scaleBand()
       .domain(data.map(d=> d.Nationality))
-      .range([0, height]) //visual variable
+      .range([height, 0]) //visual variable
       .paddingInner(.2)
 
     /* HTML ELEMENTS */
