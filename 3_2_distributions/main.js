@@ -14,7 +14,7 @@
 /* APPLICATION STATE */
 let state = {
   data: [],
-  selectedParty: "All" // + YOUR INITIAL FILTER SELECTION
+  selectedParty: "All" // + YOUR INITIAL FILTER SELECTION TEST TEST
 };
 
 /* LOAD DATA */
