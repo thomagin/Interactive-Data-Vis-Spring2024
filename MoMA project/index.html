@@ -4,29 +4,29 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MoMA Acquisitions by Nationality</title>
-<style>
-  /* CSS */
-</style>
+<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
 </head>
 <body>
   <h1>MoMA Acquisitions and US Foreign Policy</h1>
-  <div>
-    <label for="nationality-select">Select Nationality:</label>
-    <select id="nationality-select">
-      <option value="(Cuban)">Cuban</option>
-      <option value="(Iranian)">Iranian</option>
-      <option value="(Korean)">Korean</option>
-      <option value="(German)">German</option>
-      <option value="(Japanese)">Japanese</option>
-      <option value="(Russian)">Russian</option>
-      <option value="(Ukrainian)">Ukrainian</option>
-    </select>
-  </div>
   <div id="chart-container">
     <!-- CHART -->
   </div>
-
+  <label for="nationality-select">Select Nationality:</label>
+  <select id="nationality-select">
+    <option value="(Cuban)">Cuban</option>
+    <option value="(Iranian)">Iranian</option>
+    <option value="(Chinese)">Chinese</option>
+    <option value="(German)">German</option>
+    <option value="(Japanese)">Japanese</option>
+    <option value="(Russian)">Russian</option>
+    <option value="(Ukrainian)">Ukrainian</option>
+  </select>
+</div>
+  <p id="nationality-text">Select a nationality from the dropdown to see related information.</p>
   <script src="https://d3js.org/d3.v7.min.js"></script>
   <script src="main.js"></script>
+  
 </body>
 </html>
