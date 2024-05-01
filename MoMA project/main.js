@@ -9,7 +9,7 @@ d3.csv('https://media.githubusercontent.com/media/thomagin/collection/main/Artwo
     console.log(data);
     let svgChart = null;
 
-    // SELECT NATIONALITY 
+    // SELECT NATIONALITY, FILTER, COUNT ACQUISITIONS, NEW ARRAY W/ ACQ PER YEAR, SORT ARRAY
     function updateChart(selectedNationality) {
       const filteredData = data.filter(d => {
         const ValidDate = !isNaN(new Date(d.DateAcquired).getFullYear());
@@ -19,11 +19,13 @@ d3.csv('https://media.githubusercontent.com/media/thomagin/collection/main/Artwo
       const acquisitionsData = Array.from(acquisitionsPerYear, ([key, value]) => ({ year: key, acquisitions: value }));
       const sortedData = acquisitionsData.sort((a, b) => a.year - b.year);
 
+        // XSCALE
       const xScale = d3.scaleBand()
         .domain(sortedData.map(d => d.year.toString()))
         .range([margin.left, width - margin.right])
         .padding(0.1);
 
+        //YSCALE
       const yScale = d3.scaleLinear()
         .domain([0, d3.max(sortedData, d => d.acquisitions)])
         .nice()
@@ -63,8 +65,10 @@ d3.csv('https://media.githubusercontent.com/media/thomagin/collection/main/Artwo
         .attr('x', d => xScale(d.year.toString()))
         .attr('width', xScale.bandwidth());
 
+        //REMOVE AXIS
       svgChart.selectAll('g.axis').remove();
 
+      //NEW X AXIS, ROTATE LABELS
       svgChart.append('g')
         .attr('class', 'axis')
         .attr('transform', `translate(0,${height - margin.bottom})`)
@@ -73,14 +77,16 @@ d3.csv('https://media.githubusercontent.com/media/thomagin/collection/main/Artwo
         .selectAll('text')
         .style('text-anchor', 'end')
         .attr('transform', 'rotate(-45)');
-
+      //NEW Y AXIS
       svgChart.append('g')
         .attr('class', 'axis')
         .attr('transform', `translate(${margin.left},0)`)
         .call(d3.axisLeft(yScale));
 
+    //REMOVE TITLE
       svgChart.selectAll('text.chart-title').remove();
 
+      //APPEND NEW TITLE ETC
       svgChart.append('text')
         .attr('class', 'chart-title')
         .attr('x', width / 2)
@@ -119,7 +125,7 @@ d3.csv('https://media.githubusercontent.com/media/thomagin/collection/main/Artwo
       }
     }
 
-    // LANDING CHART
+    // LANDING/DEFAULT CHART
     updateChart('(Cuban)');
 
     // EVENT LISTENER FOR DROPDOWN
@@ -128,6 +134,3 @@ d3.csv('https://media.githubusercontent.com/media/thomagin/collection/main/Artwo
       updateChart(selectedNationality);
     });
   })
-  .catch(error => {
-    console.error('Error loading data:', error);
-  });

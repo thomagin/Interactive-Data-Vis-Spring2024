@@ -20,27 +20,27 @@ p {
 
 /* CSS */
 #chart-container {
-  margin-bottom: 20px; /* Add space below the chart */
-  padding-top: 20px; /* Add padding to create space between chart and header */
+  margin-bottom: 20px; 
+  padding-top: 20px; 
 }
 
 label {
-  display: block; /* Display the label as a block element */
-  margin-bottom: 5px; /* Add space below the label */
+  display: block; 
+  margin-bottom: 5px; 
 }
 
-/* Adjust the position of the dropdown */
+
 #nationality-select {
-  display: block; /* Display as block element to move below the chart */
-  margin-top: 10px; /* Add some space above the dropdown */
+  display: block; 
+  margin-top: 10px; 
 }
 
-/* Adjust the position of the chart title */
+
 .chart-title {
-  margin-top: 10px; /* Add space above the chart title */
+  margin-top: 10px; 
 }
 
-/* CSS for dropdown menu */
+/* DROPDOWN */
 #nationality-select {
   padding: 8px;
   border: 1px solid #ccc;
@@ -49,8 +49,8 @@ label {
   font-family: 'Arial', sans-serif;
   font-size: 14px;
   color: #333;
-  width: 200px; /* Adjust width as needed */
-  outline: none; /* Remove default outline */
+  width: 200px; 
+  outline: none; 
   cursor: pointer;
 }
 
@@ -61,5 +61,5 @@ label {
 }
 
 #nationality-select:focus {
-  border-color: #A98F88; /* Change border color when focused */
+  border-color: #A98F88; 
 }
