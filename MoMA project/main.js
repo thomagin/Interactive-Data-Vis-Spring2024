@@ -3,7 +3,7 @@ const width = 800;
 const height = 400;
 const margin = { top: 20, right: 20, bottom: 30, left: 50 };
 
-// LOAD DATA CREATE SVG
+// LOAD DATA CREATE SVG, STATE
 d3.csv('https://media.githubusercontent.com/media/thomagin/collection/main/Artworks.csv')
   .then(data => {
     console.log(data);
@@ -68,6 +68,9 @@ d3.csv('https://media.githubusercontent.com/media/thomagin/collection/main/Artwo
         //REMOVE AXIS
       svgChart.selectAll('g.axis').remove();
 
+         //REMOVE TITLE
+         svgChart.selectAll('text.chart-title').remove();
+
       //NEW X AXIS, ROTATE LABELS
       svgChart.append('g')
         .attr('class', 'axis')
@@ -82,9 +85,6 @@ d3.csv('https://media.githubusercontent.com/media/thomagin/collection/main/Artwo
         .attr('class', 'axis')
         .attr('transform', `translate(${margin.left},0)`)
         .call(d3.axisLeft(yScale));
-
-    //REMOVE TITLE
-      svgChart.selectAll('text.chart-title').remove();
 
       //APPEND NEW TITLE ETC
       svgChart.append('text')
