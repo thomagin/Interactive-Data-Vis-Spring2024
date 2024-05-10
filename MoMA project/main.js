@@ -1,5 +1,5 @@
 // GLOBALS AND CONSTANTS
-const width = 800;
+const width = 1200;
 const height = 400;
 const margin = { top: 20, right: 20, bottom: 30, left: 50 };
 
