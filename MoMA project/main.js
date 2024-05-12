@@ -93,7 +93,7 @@ d3.csv('https://media.githubusercontent.com/media/thomagin/collection/main/Artwo
         .attr('y', margin.top / 2 + 2)
         .attr('text-anchor', 'middle')
         .style('font-size', '16px')
-        .text(`${selectedNationality} Art Acquisitions Over Time`);
+        .text(`${selectedNationality.replace(/[()]/g, '')} Art Acquisitions Over Time`);
 
       // LITTLE PARAGRAPHS 
       
