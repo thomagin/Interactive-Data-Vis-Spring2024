@@ -84,7 +84,7 @@ d3.csv('https://media.githubusercontent.com/media/thomagin/collection/main/Artwo
       svgChart.append('g')
         .attr('class', 'axis')
         .attr('transform', `translate(${margin.left},0)`)
-        .call(d3.axisLeft(yScale));
+        .call(d3.axisLeft(yScale).ticks(Math.min(10, d3.max(sortedData, d => d.acquisitions))).tickFormat(d3.format('d')));
 
       //APPEND NEW TITLE ETC
       svgChart.append('text')
