@@ -39,8 +39,3 @@ h1, h2, h3 {
     background-color: #f2a900; /* Yellow/gold */
     color: #002d62; /* Navy blue */
 }
-
-#complaints-chart, #rates-chart {
-    margin: 0 auto;
-    width: 70%;
-}
