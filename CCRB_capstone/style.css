@@ -1,0 +1,46 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.section {
+    display: none;
+    padding: 20px;
+}
+
+.section.active {
+    display: block;
+}
+
+h1, h2, h3 {
+    text-align: center;
+}
+
+.license-plate-btn {
+    display: block;
+    width: 200px;
+    margin: 20px auto;
+    padding: 10px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #002d62; /* Navy blue */
+    border: 2px solid #f2a900; /* Yellow/gold */
+    border-radius: 5px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-align: center;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+}
+
+.license-plate-btn:hover {
+    background-color: #f2a900; /* Yellow/gold */
+    color: #002d62; /* Navy blue */
+}
+
+#complaints-chart, #rates-chart {
+    margin: 0 auto;
+    width: 70%;
+}
