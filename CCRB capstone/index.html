@@ -1,14 +1,264 @@
 <!DOCTYPE html>
-  <head>
-    <meta charset="utf-8">
-    <title>Vote for the CCRB in 2025</title>
-    <link rel="stylesheet" href="./style.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro">
-  </head>
-  <body>
-    <h3>The CCRB is on the ballot in 2025</h3>
-    <div id="container"> </div>
-    <script src="../lib/d3.js"></script>
-    <script src="main.js"></script>
-  </body>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NYC CCRB Information</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="landing-page">
+        <h1>Welcome to the NYC CCRB Information Page</h1>
+        <button id="enter-btn">Enter</button>
+    </div>
+
+    <div id="what-is-ccrb" class="section hidden">
+        <h2>What is the CCRB?</h2>
+        <div>
+            <h3>What it does</h3>
+            <p>The CCRB is an independent agency that investigates complaints of police misconduct.</p>
+        </div>
+        <div>
+            <h3>Who is part of the board?</h3>
+            <p>The board consists of 13 members appointed by the Mayor, City Council, and Police Commissioner.</p>
+        </div>
+    </div>
+
+    <div id="data-ccrb" class="section hidden">
+        <h2>Data on the CCRB</h2>
+        <div id="data-visualization"></div>
+    </div>
+
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CCRB Complaints by Administration</title>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <style>
+    .bar {
+      fill: steelblue;
+    }
+
+    .substantiated {
+      fill: green;
+    }
+
+    .unsubstantiated {
+      fill: red;
+    }
+
+    .tooltip {
+      position: absolute;
+      text-align: center;
+      width: 100px;
+      padding: 5px;
+      font: 12px sans-serif;
+      background: lightsteelblue;
+      border: 0px;
+      border-radius: 5px;
+      pointer-events: none;
+    }
+
+    .bar, .substantiated, .unsubstantiated {
+      opacity: 0.8;
+    }
+
+    .bar:hover, .substantiated:hover, .unsubstantiated:hover {
+      opacity: 1;
+      transition: opacity 0.3s ease;
+    }
+  </style>
+</head>
+<body>
+  <h1>CCRB Complaints Data</h1>
+  <div id="complaints-chart"></div>
+  <div id="rates-chart"></div>
+
+  <script>
+    // Data
+    const data = [
+      {
+        administration: 'Bloomberg',
+        totalComplaints: 218933,
+        substantiatedRate: 2.97,
+        unsubstantiatedRate: 97.03
+      },
+      {
+        administration: 'de Blasio',
+        totalComplaints: 102913,
+        substantiatedRate: 4.29,
+        unsubstantiatedRate: 95.71
+      },
+      {
+        administration: 'Adams',
+        totalComplaints: 38373,
+        substantiatedRate: 11.66,
+        unsubstantiatedRate: 88.34
+      }
+    ];
+
+    // Set up dimensions for the charts
+    const margin = {top: 40, right: 40, bottom: 40, left: 60};
+    const width = 700 - margin.left - margin.right;
+    const height = 400 - margin.top - margin.bottom;
+
+    // Tooltip for hover effects
+    const tooltip = d3.select("body").append("div")
+      .attr("class", "tooltip")
+      .style("opacity", 0);
+
+    // Create an SVG container for total complaints chart
+    const svgComplaints = d3.select("#complaints-chart")
+      .append("svg")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+      .append("g")
+      .attr("transform", `translate(${margin.left},${margin.top})`);
+
+    // X scale and axis for administrations
+    const x = d3.scaleBand()
+      .domain(data.map(d => d.administration))
+      .range([0, width])
+      .padding(0.4);
+
+    svgComplaints.append("g")
+      .attr("transform", `translate(0,${height})`)
+      .call(d3.axisBottom(x));
+
+    // Y scale and axis for total complaints
+    const y = d3.scaleLinear()
+      .domain([0, d3.max(data, d => d.totalComplaints)])
+      .range([height, 0]);
+
+    svgComplaints.append("g")
+      .call(d3.axisLeft(y));
+
+    // Bars for total complaints with animation
+    svgComplaints.selectAll(".bar")
+      .data(data)
+      .enter()
+      .append("rect")
+      .attr("class", "bar")
+      .attr("x", d => x(d.administration))
+      .attr("y", height) // Start from the bottom
+      .attr("width", x.bandwidth())
+      .attr("height", 0) // Start with no height
+      .on("mouseover", function(event, d) {
+        tooltip.transition()
+          .duration(200)
+          .style("opacity", .9);
+        tooltip.html(`Total Complaints: ${d.totalComplaints}`)
+          .style("left", (event.pageX) + "px")
+          .style("top", (event.pageY - 28) + "px");
+      })
+      .on("mouseout", function() {
+        tooltip.transition()
+          .duration(500)
+          .style("opacity", 0);
+      })
+      .transition()
+      .duration(1000) // Animation duration
+      .attr("y", d => y(d.totalComplaints))
+      .attr("height", d => height - y(d.totalComplaints));
+
+    svgComplaints.append("text")
+      .attr("x", width / 2)
+      .attr("y", 0 - margin.top / 2)
+      .attr("text-anchor", "middle")
+      .style("font-size", "16px")
+      .style("font-weight", "bold")
+      .text("Total Complaints by Administration");
+
+    // Create an SVG container for the rates chart
+    const svgRates = d3.select("#rates-chart")
+      .append("svg")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+      .append("g")
+      .attr("transform", `translate(${margin.left},${margin.top})`);
+
+    // X scale for substantiated and unsubstantiated rates chart
+    svgRates.append("g")
+      .attr("transform", `translate(0,${height})`)
+      .call(d3.axisBottom(x));
+
+    // Y scale for percentages
+    const yRate = d3.scaleLinear()
+      .domain([0, 100])
+      .range([height, 0]);
+
+    svgRates.append("g")
+      .call(d3.axisLeft(yRate));
+
+    // Stacked bar chart for substantiated and unsubstantiated rates with animation
+    svgRates.selectAll(".substantiated")
+      .data(data)
+      .enter()
+      .append("rect")
+      .attr("class", "substantiated")
+      .attr("x", d => x(d.administration))
+      .attr("y", height) // Start from the bottom
+      .attr("width", x.bandwidth())
+      .attr("height", 0) // Start with no height
+      .on("mouseover", function(event, d) {
+        tooltip.transition()
+          .duration(200)
+          .style("opacity", .9);
+        tooltip.html(`Substantiated Rate: ${d.substantiatedRate}%`)
+          .style("left", (event.pageX) + "px")
+          .style("top", (event.pageY - 28) + "px");
+      })
+      .on("mouseout", function() {
+        tooltip.transition()
+          .duration(500)
+          .style("opacity", 0);
+      })
+      .transition()
+      .duration(1000) // Animation duration
+      .attr("y", d => yRate(d.substantiatedRate))
+      .attr("height", d => height - yRate(d.substantiatedRate));
+
+    svgRates.selectAll(".unsubstantiated")
+      .data(data)
+      .enter()
+      .append("rect")
+      .attr("class", "unsubstantiated")
+      .attr("x", d => x(d.administration))
+      .attr("y", height) // Start from the bottom
+      .attr("width", x.bandwidth())
+      .attr("height", 0) // Start with no height
+      .on("mouseover", function(event, d) {
+        tooltip.transition()
+          .duration(200)
+          .style("opacity", .9);
+        tooltip.html(`Unsubstantiated Rate: ${d.unsubstantiatedRate}%`)
+          .style("left", (event.pageX) + "px")
+          .style("top", (event.pageY - 28) + "px");
+      })
+      .on("mouseout", function() {
+        tooltip.transition()
+          .duration(500)
+          .style("opacity", 0);
+      })
+      .transition()
+      .duration(1000)
+      .attr("y", d => yRate(d.substantiatedRate + d.unsubstantiatedRate))
+      .attr("height", d => height - yRate(d.unsubstantiatedRate));
+
+    svgRates.append("text")
+      .attr("x", width / 2)
+      .attr("y", 0 - margin.top / 2)
+      .attr("text-anchor", "middle")
+      .style("font-size", "16px")
+      .style("font-weight", "bold")
+      .text("Substantiated vs Unsubstantiated Rates by Administration");
+  </script>
+</body>
 </html>
