@@ -1,41 +1,72 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Times New Roman', Times, serif;
+    background-color: white;
+    color: #333;
     margin: 0;
     padding: 0;
+    line-height: 1.6;
 }
 
 .section {
-    display: none;
-    padding: 20px;
-}
-
-.section.active {
-    display: block;
-}
-
-h1, h2, h3 {
+    padding: 50px 20px; /* Split the difference in padding */
     text-align: center;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
 }
 
-.license-plate-btn {
-    display: block;
-    width: 200px;
-    margin: 20px auto;
-    padding: 10px;
-    font-size: 16px;
-    color: #fff;
-    background-color: #002d62; /* Navy blue */
-    border: 2px solid #f2a900; /* Yellow/gold */
+.section.visible {
+    opacity: 1;
+}
+
+h1, h2 {
+    margin-bottom: 20px;
+}
+
+.license-plate {
+    font-family: 'Arial', sans-serif; /* Change this to any dignified font you'd prefer */
+    font-size: 2em;
+    color: #003DA5; /* NY State License Plate Blue */
+    text-shadow: 1px 1px 2px #FFD700; /* Gold shadow for effect */
+}
+
+/* Tooltip styles */
+.tooltip {
+    position: absolute;
+    text-align: center;
+    width: 100px;
+    padding: 5px;
+    font: 12px sans-serif;
+    background: lightsteelblue;
+    border: 0px;
     border-radius: 5px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    text-align: center;
-    font-weight: bold;
-    cursor: pointer;
-    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+    pointer-events: none;
 }
 
-.license-plate-btn:hover {
-    background-color: #f2a900; /* Yellow/gold */
-    color: #002d62; /* Navy blue */
+/* D3 Charts */
+.bar {
+    fill: steelblue;
+}
+
+.substantiated {
+    fill: green;
+}
+
+.unsubstantiated {
+    fill: red;
+}
+
+/* Pie Chart colors */
+.pie-chart {
+    fill: #003DA5; /* NY State License Plate Blue */
+}
+
+.pie-chart-unsubstantiated {
+    fill: #FF0000; /* Red for unsubstantiated */
+}
+
+/* Center the charts */
+#complaints-chart, #bloomberg-chart, #de-blasio-chart, #adams-chart {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

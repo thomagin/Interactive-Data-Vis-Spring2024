@@ -3,38 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NYC CCRB Information</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>CCRB Complaints Data</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
 </head>
 <body>
-    <!-- Landing Page -->
-    <div id="landing-page" class="section active">
-        <h1>Welcome to the NYC CCRB Information Page</h1>
-        <button id="enter-btn" class="license-plate-btn">Enter</button>
+    <div class="section" id="welcome">
+        <h1 class="license-plate">Welcome to the NYC CCRB Information Page</h1>
+        <p class="license-plate">This page provides information and data on the Civilian Complaint Review Board (CCRB).</p>
     </div>
 
-    <!-- What is CCRB Section -->
-    <div id="what-is-ccrb" class="section hidden">
-        <h2>What is the CCRB?</h2>
-        <div>
-            <h3>What it does</h3>
-            <p>The CCRB is an independent agency that investigates complaints of police misconduct TEST TEST.</p>
-        </div>
-        <div>
-            <h3>Who is part of the board?</h3>
-            <p>The board consists of 13 members appointed by the Mayor, City Council, and Police Commissioner.</p>
-        </div>
-        <button id="next-to-data" class="license-plate-btn">View Data</button>
+    <div class="section" id="ccrb-info">
+        <h2 class="license-plate">What is the CCRB?</h2>
+        <p>The CCRB is an independent agency that investigates complaints of police misconduct.</p>
+        
+        <h2 class="license-plate">Who is part of the board?</h2>
+        <p>The board consists of 13 members appointed by the Mayor, City Council, and Police Commissioner.</p>
     </div>
 
-    <!-- Data Section -->
-    <div id="data-ccrb" class="section hidden">
-        <h2>Data on the CCRB</h2>
-        <div id="complaints-chart"></div>
-        <div id="rates-chart"></div>
-        <button id="back-btn" class="license-plate-btn">Back to Information</button>
+    <div class="section" id="complaints-chart"></div>
+    <div class="section" id="rates-charts">
+        <h2 class="license-plate">Substantiated Rates by Administration</h2>
+        <div id="bloomberg-chart"></div>
+        <div id="de-blasio-chart"></div>
+        <div id="adams-chart"></div>
     </div>
 
-    <script src="script.js"></script>
+    <script src="main.js"></script>
 </body>
 </html>
