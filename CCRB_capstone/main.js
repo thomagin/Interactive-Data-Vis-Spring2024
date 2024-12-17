@@ -14,9 +14,9 @@ const data = [
     },
     {
         administration: 'Adams',
-        totalComplaints: 38373,
-        substantiatedRate: 11.66,
-        unsubstantiatedRate: 88.34
+        totalComplaints: 55566,
+        substantiatedRate: 11.20,
+        unsubstantiatedRate: 88.80
     }
 ];
 
